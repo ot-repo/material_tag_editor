@@ -66,6 +66,18 @@ class _MyHomePageState extends State<MyHomePage> {
           focusNode: _focusNode,
           delimiters: [',', ' '],
           hasAddButton: true,
+          inputDecoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1.0, color: Colors.grey),
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1.0, color: Colors.grey),
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            hintText: 'Ingredient',
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          ),
           resetTextOnSubmitted: true,
           // This is set to grey just to illustrate the `textStyle` prop
           textStyle: const TextStyle(color: Colors.grey),
@@ -74,10 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
               _values.add(outstandingValue);
             });
           },
-          inputDecoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Hint Text...',
-          ),
           onTagChanged: (newValue) {
             setState(() {
               _values.add(newValue);

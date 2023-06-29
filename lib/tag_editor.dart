@@ -226,7 +226,6 @@ class _TagsEditorState extends State<TagEditor> {
         : widget.inputDecoration;
 
     final tagEditorArea = Container(
-      height: 110,
       child: Column(
         children: [
           LayoutId(
