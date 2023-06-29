@@ -122,8 +122,7 @@ class _TagsEditorState extends State<TagEditor> {
   void initState() {
     super.initState();
     _textFieldController = (widget.controller ?? TextEditingController());
-    _focusNode = (widget.focusNode ?? FocusNode())
-      ..addListener(_onFocusChanged);
+    _focusNode = (widget.focusNode ?? FocusNode())..addListener(_onFocusChanged);
   }
 
   void _onFocusChanged() {
@@ -227,45 +226,47 @@ class _TagsEditorState extends State<TagEditor> {
         : widget.inputDecoration;
 
     final tagEditorArea = Container(
-      child: TagLayout(
-        delegate: TagEditorLayoutDelegate(
-          length: widget.length,
-          minTextFieldWidth: widget.minTextFieldWidth,
-          spacing: widget.tagSpacing,
-        ),
-        children: List<Widget>.generate(
-              widget.length,
-              (index) => LayoutId(
-                id: TagEditorLayoutDelegate.getTagId(index),
-                child: widget.tagBuilder(context, index),
-              ),
-            ) +
-            <Widget>[
-              LayoutId(
-                id: TagEditorLayoutDelegate.textFieldId,
-                child: TextField(
-                  style: widget.textStyle,
-                  focusNode: _focusNode,
-                  enabled: widget.enabled,
-                  controller: _textFieldController,
-                  keyboardType: widget.keyboardType,
-                  keyboardAppearance: widget.keyboardAppearance,
-                  textCapitalization: widget.textCapitalization,
-                  textInputAction: widget.textInputAction,
-                  autocorrect: widget.autocorrect,
-                  textAlign: widget.textAlign,
-                  textDirection: widget.textDirection,
-                  readOnly: widget.readOnly,
-                  autofocus: widget.autofocus,
-                  enableSuggestions: widget.enableSuggestions,
-                  maxLines: widget.maxLines,
-                  decoration: decoration,
-                  onChanged: _onTextFieldChange,
-                  onSubmitted: _onSubmitted,
-                  inputFormatters: widget.inputFormatters,
+      height: 96,
+      child: Column(
+        children: [
+          LayoutId(
+            id: TagEditorLayoutDelegate.textFieldId,
+            child: TextField(
+              style: widget.textStyle,
+              focusNode: _focusNode,
+              enabled: widget.enabled,
+              controller: _textFieldController,
+              keyboardType: widget.keyboardType,
+              keyboardAppearance: widget.keyboardAppearance,
+              textCapitalization: widget.textCapitalization,
+              textInputAction: widget.textInputAction,
+              autocorrect: widget.autocorrect,
+              textAlign: widget.textAlign,
+              textDirection: widget.textDirection,
+              readOnly: widget.readOnly,
+              autofocus: widget.autofocus,
+              enableSuggestions: widget.enableSuggestions,
+              maxLines: widget.maxLines,
+              decoration: decoration,
+              onChanged: _onTextFieldChange,
+              onSubmitted: _onSubmitted,
+              inputFormatters: widget.inputFormatters,
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              spacing: 8,
+              children: List<Widget>.generate(
+                widget.length,
+                (index) => LayoutId(
+                  id: TagEditorLayoutDelegate.getTagId(index),
+                  child: widget.tagBuilder(context, index),
                 ),
-              )
-            ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
 

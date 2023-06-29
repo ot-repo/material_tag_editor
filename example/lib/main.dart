@@ -58,54 +58,38 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title ?? ''),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            children: <Widget>[
-              TagEditor(
-                length: _values.length,
-                controller: _textEditingController,
-                focusNode: _focusNode,
-                delimiters: [',', ' '],
-                hasAddButton: true,
-                resetTextOnSubmitted: true,
-                // This is set to grey just to illustrate the `textStyle` prop
-                textStyle: const TextStyle(color: Colors.grey),
-                onSubmitted: (outstandingValue) {
-                  setState(() {
-                    _values.add(outstandingValue);
-                  });
-                },
-                inputDecoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Hint Text...',
-                ),
-                onTagChanged: (newValue) {
-                  setState(() {
-                    _values.add(newValue);
-                  });
-                },
-                tagBuilder: (context, index) => _Chip(
-                  index: index,
-                  label: _values[index],
-                  onDeleted: _onDelete,
-                ),
-                // InputFormatters example, this disallow \ and /
-                inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))
-                ],
-              ),
-              const Divider(),
-              // This is just a button to illustrate how to use
-              // TextEditingController to set the value
-              // or do whatever you want with it
-              ElevatedButton(
-                onPressed: _onPressedModifyTextField,
-                child: const Text('Use Controlelr to Set Value'),
-              ),
-            ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TagEditor(
+          length: _values.length,
+          controller: _textEditingController,
+          focusNode: _focusNode,
+          delimiters: [',', ' '],
+          hasAddButton: true,
+          resetTextOnSubmitted: true,
+          // This is set to grey just to illustrate the `textStyle` prop
+          textStyle: const TextStyle(color: Colors.grey),
+          onSubmitted: (outstandingValue) {
+            setState(() {
+              _values.add(outstandingValue);
+            });
+          },
+          inputDecoration: const InputDecoration(
+            border: InputBorder.none,
+            hintText: 'Hint Text...',
           ),
+          onTagChanged: (newValue) {
+            setState(() {
+              _values.add(newValue);
+            });
+          },
+          tagBuilder: (context, index) => _Chip(
+            index: index,
+            label: _values[index],
+            onDeleted: _onDelete,
+          ),
+          // InputFormatters example, this disallow \ and /
+          inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))],
         ),
       ),
     );
